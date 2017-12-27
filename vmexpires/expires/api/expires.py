@@ -103,6 +103,8 @@ def get(request, id):
     tabelt.id = res_json['id']
     tabelt.user = res_json['user_id']
     tabelt.instance = res_json['instance_id']
+    if res_json['instance_name']:
+        tabelt.instance = res_json['instance_name']
     tabelt.expire = datetime.datetime.fromtimestamp(res_json['expire']).isoformat()
     tabelt.created_at = res_json['created']
     tabelt.updated_at = res_json['updated']
@@ -149,6 +151,8 @@ def list(request):
         tabelt.id = elt['id']
         tabelt.user = elt['user_id']
         tabelt.instance = elt['instance_id']
+        if elt['instance_name']:
+            tabelt.instance = res_json['instance_name']
         tabelt.expire = datetime.datetime.fromtimestamp(elt['expire']).isoformat()
         tabelt.created_at = elt['created']
         tabelt.updated_at = elt['updated']
