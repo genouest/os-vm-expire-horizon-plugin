@@ -12,3 +12,7 @@ On Horizon server:
     python setup.py install
 
 Copy _90_vmexpires.py to dashboard enabled plugins directory and restart Horizon.
+
+## Tested on
+
+Plugin has been tested on Otaca release.

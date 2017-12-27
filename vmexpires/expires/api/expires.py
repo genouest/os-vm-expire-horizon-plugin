@@ -9,15 +9,16 @@ from openstack_dashboard.api import base
 
 from horizon.utils.memoized import memoized
 from horizon.utils.memoized import memoized_with_request
+from horizon import exceptions
 
 LOG = logging.getLogger(__name__)
 
-VERSIONS = base.APIVersionManager("openstackvmexpirationmanagement", preferred_version='1')
+VERSIONS = base.APIVersionManager("vmexpire", preferred_version=1)
 
 def get_auth_params_from_request(request):
     auth_url = base.url_for(request, 'identity')
     vmexpire_urls = []
-    for service_name in ('openstackvmexpirationmanagement',):
+    for service_name in ('vmexpire',):
         try:
             vmexpire_url = base.url_for(request, service_name)
             vmexpire_urls.append((service_name, vmexpire_url))
@@ -44,7 +45,10 @@ def vmexpireclient(request_auth_params, version=None):
     cacert = getattr(settings, 'OPENSTACK_SSL_CACERT', None)
 
     username, token_id, tenant_id, vmexpire_urls, auth_url = request_auth_params
-    version = base.Version(version)
+    try:
+        version = base.Version(version)
+    except Exception:
+        version = str(version)
     service_names = ('vmexpire',)
     for name, vmexpire_url in vmexpire_urls:
         if name in service_names:
@@ -129,10 +133,8 @@ def extend(request, id):
 def list(request):
     username = request.user.username
     project_id = request.user.tenant_id
-    LOG.error("[DEBUG] TODO")
     list = []
     data = vmexpireclient(request)
-    LOG.error("[DEBUG] conn info" + str(data))
     headers = {'Content-Type': 'application/json', 'X-Auth-Token': data['auth_token']}
     try:
         instances = requests.get(data['management_url'] + '/vmexpire/', headers=headers)
