@@ -91,7 +91,7 @@ def get(request, id):
     elt = None
     headers = {'Content-Type': 'application/json', 'X-Auth-Token': data['auth_token']}
     try:
-        elt = requests.get(data['management_url'] + '/vmexpire/' + str(id), headers=headers)
+        elt = requests.get(data['management_url'] + '/vmexpires/' + str(id), headers=headers)
     except Exception as e:
         LOG.exception(e)
         return None
@@ -121,7 +121,7 @@ def extend(request, id):
     elt = None
     headers = {'Content-Type': 'application/json', 'X-Auth-Token': data['auth_token']}
     try:
-        elt = requests.put(data['management_url'] + '/vmexpire/' + str(id), headers=headers)
+        elt = requests.put(data['management_url'] + '/vmexpires/' + str(id), headers=headers)
     except Exception as e:
         LOG.error("failed to send put")
         LOG.exception(e)
@@ -139,7 +139,7 @@ def list(request):
     data = vmexpireclient(request)
     headers = {'Content-Type': 'application/json', 'X-Auth-Token': data['auth_token']}
     try:
-        instances = requests.get(data['management_url'] + '/vmexpire/', headers=headers)
+        instances = requests.get(data['management_url'] + '/vmexpires/', headers=headers)
     except Exception as e:
         LOG.exception(e)
         return list
