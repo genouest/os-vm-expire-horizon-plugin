@@ -1,4 +1,7 @@
 CHANGES
 =======
 
+* 0.9.3
+  Fix api version discovery for Pike
+
 * first release
