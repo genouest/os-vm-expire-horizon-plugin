@@ -13,7 +13,7 @@ from horizon import exceptions
 
 LOG = logging.getLogger(__name__)
 
-VERSIONS = base.APIVersionManager("vmexpire", preferred_version=1)
+VERSIONS = base.APIVersionManager("vmexpire", preferred_version=base.Version(1))
 
 def get_auth_params_from_request(request):
     auth_url = base.url_for(request, 'identity')

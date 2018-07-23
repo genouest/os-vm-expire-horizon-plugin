@@ -15,4 +15,4 @@ Copy _90_vmexpires.py to dashboard enabled plugins directory and restart Horizon
 
 ## Tested on
 
-Plugin has been tested on Otaca release.
+Plugin has been tested on Pike release, should work on previous releases
