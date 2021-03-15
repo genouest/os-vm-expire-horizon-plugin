@@ -155,7 +155,7 @@ def list(request):
         tabelt.user = elt['user_id']
         tabelt.instance = elt['instance_id']
         if elt['instance_name']:
-            tabelt.instance = res_json['instance_name']
+            tabelt.instance = elt['instance_name']
         tabelt.expire = datetime.datetime.fromtimestamp(elt['expire']).isoformat()
         tabelt.created_at = elt['created']
         tabelt.updated_at = elt['updated']
