@@ -8,7 +8,7 @@ import requests
 from openstack_dashboard.api import base
 
 from horizon.utils.memoized import memoized
-from horizon.utils.memoized import memoized_with_request
+# from horizon.utils.memoized import memoized_with_request
 from horizon import exceptions
 
 LOG = logging.getLogger(__name__)
@@ -36,15 +36,18 @@ def get_auth_params_from_request(request):
         auth_url,
     )
 
-@memoized_with_request(get_auth_params_from_request)
-def vmexpireclient(request_auth_params, version=None):
+#@memoized_with_request(get_auth_params_from_request)
+@memoized
+def vmexpireclient(request, version=None):
     if version is None:
         api_version = VERSIONS.get_active_version()
         version = api_version['version']
     insecure = getattr(settings, 'OPENSTACK_SSL_NO_VERIFY', False)
     cacert = getattr(settings, 'OPENSTACK_SSL_CACERT', None)
 
-    username, token_id, tenant_id, vmexpire_urls, auth_url = request_auth_params
+    # username, token_id, tenant_id, vmexpire_urls, auth_url = request_auth_params
+    (username, token_id, tenant_id, vmexpire_urls,
+        auth_url) = get_auth_params_from_request(request)
     try:
         version = base.Version(version)
     except Exception:
