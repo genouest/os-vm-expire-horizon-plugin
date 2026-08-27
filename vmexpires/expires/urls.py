@@ -10,7 +10,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from django.conf.urls import re_path
+from django.urls import re_path
 
 from vmexpires.expires import views
 
