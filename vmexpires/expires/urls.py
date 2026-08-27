@@ -10,14 +10,14 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from django.conf.urls import url
+from django.conf.urls import re_path
 
 from vmexpires.expires import views
 
 
 urlpatterns = [
-    url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^(?P<instance_id>[^/]+)/extend/$',
+    re_path(r'^$', views.IndexView.as_view(), name='index'),
+    re_path(r'^(?P<instance_id>[^/]+)/extend/$',
         views.ExtendView.as_view(),
         name='extend'),
 ]

@@ -1,5 +1,5 @@
-from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ungettext_lazy
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ngettext_lazy
 
 from horizon import tables
 from openstack_dashboard import api
@@ -32,7 +32,7 @@ class DeleteAction(tables.DeleteAction):
 
     @staticmethod
     def action_present(count):
-        return ungettext_lazy(
+        return ngettext_lazy(
             u"Delete expire",
             u"Delete expires",
             count
@@ -40,7 +40,7 @@ class DeleteAction(tables.DeleteAction):
 
     @staticmethod
     def action_past(count):
-        return ungettext_lazy(
+        return ngettext_lazy(
             u"Deleted expire",
             u"Deleted expires",
             count
